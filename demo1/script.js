@@ -150,6 +150,7 @@ function initEventListeners() {
     
     // 元数据相关事件
     document.getElementById('save-metadata')?.addEventListener('click', saveMetadata);
+    document.getElementById('reset-metadata')?.addEventListener('click', () => loadMetadata(currentMetadataType));
     document.querySelectorAll('input[name="metadata-type"]').forEach(radio => {
         radio.addEventListener('change', (e) => {
             currentMetadataType = e.target.value;
