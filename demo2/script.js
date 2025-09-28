@@ -404,7 +404,15 @@ function loadApp(appId, category, index) {
             plugin_group_id: app.plugin_group_id || ""
         };
         
-        appEditor.setValue(JSON.stringify(pluginConfig, null, 2));
+        // 如果是隧道应用，添加提示信息
+        if (category === 'tunnel') {
+            const tunnelWarning = {
+                "提示": "隧道应用不支持自定义网关插件，保存无效"
+            };
+            appEditor.setValue(JSON.stringify(tunnelWarning, null, 2));
+        } else {
+            appEditor.setValue(JSON.stringify(pluginConfig, null, 2));
+        }
     }
 }
 
@@ -664,6 +672,12 @@ function saveApp() {
         const index = parseInt(parts[1]);
         
         if (!apps[category] || !apps[category][index]) return;
+        
+        // 检查是否为隧道应用，直接禁止保存
+        if (category === 'tunnel') {
+            showToast('隧道应用不支持自定义网关插件，保存无效', 'error');
+            return;
+        }
         
         // 只更新插件组配置
         apps[category][index].plugin_group_id = pluginConfig.plugin_group_id || "";
