@@ -434,6 +434,15 @@ h1, h2, h3, h4 {
     background-color: #1976D2;
 }
 
+.save-btn {
+    background-color: rgb(24,144,255) !important;
+    color: white !important;
+}
+
+.save-btn:hover {
+    background-color: rgba(24,144,255,0.8) !important;
+}
+
 /* 对话框 */
 .dialog {
     display: none;
