@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用插件管理</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Monaco Editor Loader -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.36.1/min/vs/loader.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>应用插件管理</h1>
+        </header>
+        
+        <!-- 标签导航 -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="app-tab">应用</button>
+            <button class="tab-btn" data-tab="group-tab">插件组</button>
+            <button class="tab-btn" data-tab="plugin-tab">插件</button>
+            <button class="tab-btn" data-tab="metadata-tab">元数据</button>
+        </div>
+        
+        <!-- 移除测试用例加载按钮 -->
+        
+        <!-- 标签内容 -->
+        <div class="tab-content">
+            <!-- 插件标签页 -->
+            <div id="plugin-tab" class="tab-pane">
+                <div class="panel-layout">
+                    <div class="panel-full">
+                        <div class="editor-header">
+                            <h3>插件配置</h3>
+                            <div class="button-group">
+                                <button id="save-plugin" class="btn">保存</button>
+                                <button id="reset-plugin" class="btn">重置</button>
+                            </div>
+                        </div>
+                        <div id="plugin-editor" class="editor"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 插件组标签页 -->
+            <div id="group-tab" class="tab-pane">
+                <div class="panel-layout">
+                    <div class="panel-full">
+                        <div class="editor-header">
+                            <h3>插件组配置</h3>
+                            <div class="button-group">
+                                <button id="save-group" class="btn">保存</button>
+                                <button id="reset-group" class="btn">重置</button>
+                            </div>
+                        </div>
+                        <div id="group-editor" class="editor"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 应用标签页 -->
+            <div id="app-tab" class="tab-pane active">
+                <div class="panel-layout">
+                    <div class="panel-left">
+                        <div class="app-type-tabs">
+                            <button id="web-app-btn" class="app-type-btn active">WEB应用</button>
+                            <button id="tunnel-app-btn" class="app-type-btn">隧道应用</button>
+                        </div>
+                        <div id="app-lists-container">
+                            <div id="web-app-container" class="app-list-container active">
+                                <ul id="web-app-list" class="item-list">
+                                    <!-- WEB应用列表将通过JavaScript动态生成 -->
+                                </ul>
+                            </div>
+                            <div id="tunnel-app-container" class="app-list-container">
+                                <ul id="tunnel-app-list" class="item-list">
+                                    <!-- 隧道应用列表将通过JavaScript动态生成 -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-right">
+                        <div class="editor-header">
+                            <h3>插件配置</h3>
+                            <div class="button-group">
+                                <button id="save-app" class="btn">保存</button>
+                                <button id="reset-app" class="btn">重置</button>
+                            </div>
+                        </div>
+                        <div id="app-editor" class="editor"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 元数据标签页 -->
+            <div id="metadata-tab" class="tab-pane">
+                <div class="panel-layout">
+                    <div class="panel-full">
+                        <div class="editor-header">
+                            <h3>元数据配置</h3>
+                            <div class="button-group">
+                                <button id="save-metadata" class="btn">保存</button>
+                            </div>
+                        </div>
+                        <div id="metadata-editor" class="editor"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 对话框 -->
+        <div id="dialog" class="dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">
+                    <h3 id="dialog-title">对话框标题</h3>
+                    <button id="dialog-close" class="close-btn">&times;</button>
+                </div>
+                <div id="dialog-body" class="dialog-body">
+                    <!-- 对话框内容将通过JavaScript动态生成 -->
+                </div>
+                <div class="dialog-footer">
+                    <button id="dialog-cancel" class="btn">取消</button>
+                    <button id="dialog-confirm" class="btn primary">确定</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 提示框 -->
+        <div id="toast" class="toast"></div>
+    </div>
+    
+    <!-- 自定义JS -->
+    <script src="script.js"></script>
+</body>
+</html>

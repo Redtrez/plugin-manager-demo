@@ -1,0 +1,382 @@
+{
+  "nmgcyy_login_page_gid": [
+    "redirect",
+    "client_ip",
+    "uri_blocker",
+    "ua_restriction",
+    {
+      "name": "passwd_capture",
+      "conf": {
+        "username_selector": "",
+        "login_url_pattern": "^https://cyymch.nmgcyy.com.cn:19304/tpp/#/login/signin",
+        "password_selector": "",
+        "run_as": "set"
+      }
+    },
+    "strategy_auth",
+    "unzip",
+    "response_rewrite",
+    "gzip"
+  ],
+  "weaver_gid": [
+    "redirect",
+    "client_ip",
+    "regex_whiteuri",
+    "uri_blocker",
+    "ua_restriction",
+    {
+      "name": "anony_attack_blocker",
+      "conf": {
+        "allow_degradation": false,
+        "rejected_code": 503,
+        "time_window": 5,
+        "key_type": "var",
+        "logging_body": true,
+        "count": 100,
+        "rejected_msg": "你是爬虫吗？",
+        "key": "remote_addr",
+        "max_body_size": 4096,
+        "policy": "local"
+      }
+    },
+    {
+      "name": "anony_attack_blocker",
+      "conf": {
+        "allow_request": false,
+        "auto_blacklist_ip": true,
+        "key_type": "var_combination",
+        "rejected_ip_msg": "ip限制",
+        "logging_body": true,
+        "count": 6,
+        "rejected_msg": "匿名访问限制",
+        "limit_object_key": "-uri",
+        "allow_degradation": false,
+        "rejected_code": 503,
+        "blacklist_duration": 600,
+        "time_window": 10,
+        "blacklist_scope": "route",
+        "blacklist_dict": "bruteforce_ip",
+        "key": "$remote_addr $uri",
+        "max_body_size": 4096,
+        "policy": "local"
+      }
+    },
+    "passwd_capture",
+    {
+      "name": "exposure_auth",
+      "conf": {
+        "inner_name": "weaver.weaver",
+        "rejected_code": 403,
+        "organization_id": "1960254988597194754",
+        "rejected_html_msg": "禁止访问"
+      }
+    },
+    "strategy_auth",
+    "proxy_rewrite",
+    "unzip",
+    "audit_logger",
+    "response_rewrite",
+    "response_script_inject",
+    "gzip",
+    "app_logger"
+  ],
+  "weaver_session_login_gid": [
+    "redirect",
+    "client_ip",
+    "uri_blocker",
+    "ua_restriction",
+    "passwd_capture",
+    {
+      "name": "weaver_session_login",
+      "conf": {
+        "organization_id": "1960254988597194754"
+      }
+    },
+    "strategy_auth",
+    "unzip",
+    "response_rewrite",
+    "gzip"
+  ],
+  "weaver_app_login_gid": [
+    "redirect",
+    "client_ip",
+    "uri_blocker",
+    "ua_restriction",
+    {
+      "name": "passwd_bruteforce",
+      "conf": {
+        "allow_degradation": false,
+        "auto_blacklist_ip": true,
+        "blacklist_duration": 600,
+        "rejected_code": 200,
+        "time_window": 8,
+        "key_scope": "route",
+        "blacklist_scope": "route",
+        "logging_body": true,
+        "count": 4,
+        "key_username": "username",
+        "blacklist_dict": "bruteforce_ip",
+        "rejected_msg": "{\"code\":10206,\"msg\":\"非法攻击\",\"status\":false,\"fail\":true}"
+      }
+    },
+    {
+      "name": "weaver_mobile_login",
+      "conf": {
+        "organization_id": "1960254988597194754"
+      }
+    },
+    "strategy_auth",
+    "unzip",
+    "response_rewrite",
+    "gzip"
+  ],
+  "nmgcyy_login_page_gid2": [
+    "redirect",
+    "client_ip",
+    "uri_blocker",
+    "ua_restriction",
+    {
+      "name": "passwd_capture",
+      "conf": {
+        "username_selector": "",
+        "login_url_pattern": "^https://cyymch.nmgcyy.com.cn:19226/tpp/#/login/signin",
+        "password_selector": "",
+        "run_as": "set"
+      }
+    },
+    "strategy_auth",
+    "unzip",
+    "response_rewrite",
+    "gzip"
+  ],
+  "nmgcyy_login_gid": [
+    "redirect",
+    "client_ip",
+    "uri_blocker",
+    "ua_restriction",
+    {
+      "name": "passwd_capture",
+      "conf": {
+        "run_as": "get"
+      }
+    },
+    {
+      "name": "passwd_restriction",
+      "conf": {
+        "rejected_code": 200,
+        "enable_weakpass_dict": true,
+        "min_passwd_length": 6,
+        "allow_username_in_passwd": false,
+        "blacklist": [
+          "^[0-9]+$",
+          "^[a-zA-Z]+$"
+        ],
+        "whitelist": [
+          "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{8,}$"
+        ],
+        "rejected_msg": "{\"code\":\"403\",\"message\":\"弱密码禁止登录\"}",
+        "block_request": true
+      }
+    },
+    {
+      "name": "passwd_bruteforce",
+      "conf": {
+        "allow_degradation": false,
+        "auto_blacklist_ip": true,
+        "blacklist_duration": 120,
+        "rejected_code": 200,
+        "time_window": 10,
+        "key_scope": "route",
+        "blacklist_scope": "route",
+        "count": 5,
+        "key_username": "user",
+        "blacklist_dict": "bruteforce_ip",
+        "rejected_msg": "{\"code\":\"403\",\"message\":\"非法攻击\"}"
+      }
+    },
+    {
+      "name": "nmgcyy_login",
+      "conf": {
+        "organization_id": "1960254988597194754"
+      }
+    },
+    "strategy_auth",
+    "unzip",
+    "response_rewrite",
+    "response_script_inject",
+    "gzip"
+  ],
+  "weaver_login_page_gid": [
+    "redirect",
+    "client_ip",
+    "uri_blocker",
+    "ua_restriction",
+    {
+      "name": "passwd_capture",
+      "conf": {
+        "username_selector": "input[autocomplete*=\"new-password\"], input[data-id*=\"ui-input\"]",
+        "login_url_pattern": "^https://demowork.weaver.com.cn:20443/login",
+        "password_selector": "",
+        "run_as": "set"
+      }
+    },
+    "strategy_auth",
+    "unzip",
+    "response_rewrite",
+    "gzip"
+  ],
+  "weaver_account_login_gid": [
+    "redirect",
+    "client_ip",
+    "uri_blocker",
+    "ua_restriction",
+    {
+      "name": "passwd_capture",
+      "conf": {
+        "run_as": "get"
+      }
+    },
+    {
+      "name": "passwd_restriction",
+      "conf": {
+        "rejected_code": 200,
+        "enable_weakpass_dict": true,
+        "min_passwd_length": 8,
+        "allow_username_in_passwd": false,
+        "logging_body": true,
+        "blacklist": [
+          "^[0-9]+$",
+          "^[a-zA-Z]+$"
+        ],
+        "rejected_msg": "弱密码禁止登录",
+        "block_request": false
+      }
+    },
+    {
+      "name": "passwd_bruteforce",
+      "conf": {
+        "auto_blacklist_ip": true,
+        "rejected_ip_msg": "{\"code\":10206,\"msg\":\"IP封禁\",\"status\":false,\"fail\":true}",
+        "logging_body": true,
+        "count": 4,
+        "key_username": "user",
+        "rejected_msg": "{\"code\":10206,\"msg\":\"账号密码短时间内错误次数已达上限，ip封禁10分钟\",\"status\":false,\"fail\":true}",
+        "allow_degradation": false,
+        "blacklist_duration": 120,
+        "rejected_code": 200,
+        "time_window": 30,
+        "key_scope": "route",
+        "blacklist_scope": "route",
+        "blacklist_dict": "bruteforce_ip",
+        "block_request": true
+      }
+    },
+    "weaver_account_login",
+    "strategy_auth",
+    "unzip",
+    "response_rewrite",
+    "gzip"
+  ],
+  "node_demo_login_gid": [
+    "redirect",
+    "client_ip",
+    {
+      "name": "passwd_capture",
+      "conf": {
+        "username_selector": "",
+        "login_url_pattern": "^https://node\\.tiger-sec\\.cn:20443/login",
+        "password_selector": "",
+        "run_as": "both"
+      }
+    },
+    {
+      "name": "passwd_restriction",
+      "conf": {
+        "rejected_code": 403,
+        "enable_weakpass_dict": true,
+        "min_passwd_length": 8,
+        "allow_username_in_passwd": false,
+        "blacklist": [
+          "^[0-9]+$",
+          "^[a-zA-Z]+$"
+        ],
+        "key_username": "user",
+        "key_password": "password",
+        "rejected_msg": "弱密码禁止登录",
+        "block_request": true
+      }
+    },
+    {
+      "name": "passwd_bruteforce",
+      "conf": {
+        "allow_degradation": false,
+        "auto_blacklist_ip": true,
+        "blacklist_duration": 120,
+        "rejected_code": 403,
+        "time_window": 10,
+        "key_scope": "route",
+        "blacklist_scope": "route",
+        "count": 4,
+        "key_username": "user",
+        "blacklist_dict": "bruteforce_ip",
+        "rejected_msg": "账号密码短时间内错误次数已达上限，账号封禁10分钟"
+      }
+    },
+    {
+      "name": "node_demo_login",
+      "conf": {
+        "organization_id": "1960254988597194754"
+      }
+    },
+    "strategy_auth",
+    "unzip",
+    "response_rewrite",
+    "response_script_inject",
+    "gzip"
+  ],
+  "nmgcyy_gid": [
+    "redirect",
+    "client_ip",
+    "regex_whiteuri",
+    "uri_blocker",
+    "ua_restriction",
+    "anony_attack_blocker",
+    "passwd_capture",
+    {
+      "name": "exposure_auth",
+      "conf": {
+        "inner_name": "nmgcyy.nmgcyy",
+        "organization_id": "1960254988597194754"
+      }
+    },
+    "strategy_auth",
+    "proxy_rewrite",
+    "unzip",
+    "audit_logger",
+    "response_rewrite",
+    "response_script_inject",
+    "gzip",
+    "app_logger"
+  ],
+  "node_demo_gid": [
+    "redirect",
+    "client_ip",
+    "regex_whiteuri",
+    "anony_attack_blocker",
+    {
+      "name": "exposure_auth",
+      "conf": {
+        "inner_name": "node_demo.node_demo",
+        "organization_id": "1960254988597194754"
+      }
+    },
+    "strategy_auth",
+    "proxy_rewrite",
+    "unzip",
+    "audit_logger",
+    "response_rewrite",
+    "response_script_inject",
+    "gzip",
+    "app_logger"
+  ]
+}

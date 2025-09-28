@@ -1,0 +1,52 @@
+{
+  "uri_blocker": {
+    "allow_request": false,
+    "case_insensitive": true,
+    "block_rules": [
+      "\\b(select|insert|update|delete|drop|union|create|alter|truncate|where)\\b\\s+",
+      "\\.\\./"
+    ],
+    "block_namerules": [
+      {
+        "regex": "\\b(select|insert|update|delete|drop|union|create|alter|truncate|where)\\b\\s+",
+        "name": "sql注入",
+        "options": "jio"
+      },
+      {
+        "regex": "\\.\\./",
+        "name": "目录遍历",
+        "options": "jio"
+      }
+    ],
+    "rejected_html_msg": "001: 触发危险URL访问策略，请联系管理员"
+  },
+  "anony_attack_blocker": {
+    "allow_degradation": false,
+    "rejected_code": 503,
+    "time_window": 5,
+    "key_type": "var",
+    "logging_body": true,
+    "count": 100,
+    "rejected_msg": "你是爬虫吗？",
+    "key": "remote_addr",
+    "max_body_size": 4096,
+    "policy": "local"
+  },
+  "client_ip": {
+    "trusted_addresses": [
+      "100.127.194.0/24"
+    ],
+    "source": "http_x_forwarded_for",
+    "recursive": true
+  },
+  "ua_restriction": {
+    "bypass_missing": true,
+    "allowlist": [
+      "(?i)(chrome|firefox|safari|edge|trident|msie|opera)"
+    ],
+    "denylist": [
+      "(?i)(curl|wget|httpclient|postman|python-requests|httpie|httpx|go-http-client|sqlmap|acunetix|nikto|awvs|dirbuster|gobuster|wfuzz)"
+    ],
+    "message": "Do you want to do something bad?"
+  }
+}
