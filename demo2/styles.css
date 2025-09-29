@@ -200,12 +200,86 @@ h1, h2, h3, h4 {
     border-bottom-color: #1890ff;
 }
 
+.search-filter-container {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    background: #f5f7fa;
+    padding: 6px 0;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.filter-dropdown {
+    margin-right: 10px;
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.filter-dropdown select {
+    width: 100%;
+    padding: 6px 24px 6px 10px;
+    border: 1px solid #dce1e8;
+    border-radius: 4px;
+    background-color: #fff;
+    height: 32px;
+    font-size: 13px;
+    color: #333;
+    box-shadow: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    background-size: 12px;
+}
+
+.filter-dropdown select:hover {
+    border-color: #4a89dc;
+}
+
+.filter-dropdown select:focus {
+    outline: none;
+    border-color: #4a89dc;
+    box-shadow: 0 0 0 2px rgba(74,137,220,0.1);
+}
+
+.search-box {
+    display: flex;
+    flex: 1;
+    height: 32px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #dce1e8;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #333;
+    height: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-box input:hover,
+.search-box input:focus {
+    outline: none;
+    border-color: #4a89dc;
+    box-shadow: 0 0 0 2px rgba(74,137,220,0.1);
+}
+
 .app-list-container {
     display: none;
 }
 
 .app-list-container.active {
     display: block;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .app-details {

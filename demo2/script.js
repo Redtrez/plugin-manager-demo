@@ -114,6 +114,9 @@ function initAppTypeTabs() {
         // 显示WEB应用列表，隐藏隧道应用列表
         document.getElementById('web-app-container').classList.add('active');
         document.getElementById('tunnel-app-container').classList.remove('active');
+        
+        // 重新应用当前的搜索和筛选
+        handleSearchFilter();
     });
     
     tunnelAppBtn.addEventListener('click', function() {
@@ -124,7 +127,19 @@ function initAppTypeTabs() {
         // 显示隧道应用列表，隐藏WEB应用列表
         document.getElementById('tunnel-app-container').classList.add('active');
         document.getElementById('web-app-container').classList.remove('active');
+        
+        // 重新应用当前的搜索和筛选
+        handleSearchFilter();
     });
+}
+
+// 处理搜索和筛选
+function handleSearchFilter() {
+    const searchTerm = document.getElementById('app-search').value.trim();
+    const filterType = document.getElementById('app-filter').value;
+    
+    // 更新应用列表，应用搜索和筛选条件
+    updateAppList(searchTerm, filterType);
 }
 
 // 初始化事件监听器
@@ -148,6 +163,10 @@ function initEventListeners() {
     document.getElementById('reset-app')?.addEventListener('click', () => loadApp(currentAppId));
     document.getElementById('apply-group-to-app')?.addEventListener('click', applyGroupToCurrentApp);
     document.getElementById('format-app')?.addEventListener('click', () => formatJSON(appEditor));
+    
+    // 搜索和筛选事件
+    document.getElementById('app-search')?.addEventListener('input', handleSearchFilter);
+    document.getElementById('app-filter')?.addEventListener('change', handleSearchFilter);
     
     // 移除插件组应用到应用的事件
     document.getElementById('remove-group-from-app')?.addEventListener('click', removeGroupFromCurrentApp);
@@ -291,7 +310,7 @@ function updateGroupList() {
 }
 
 // 更新应用列表
-function updateAppList() {
+function updateAppList(searchTerm = '', filterType = 'all') {
     const webAppList = document.getElementById('web-app-list');
     const tunnelAppList = document.getElementById('tunnel-app-list');
     if (!webAppList || !tunnelAppList) return;
@@ -302,8 +321,22 @@ function updateAppList() {
     // 添加Web应用
     if (apps.web && apps.web.length > 0) {
         apps.web.forEach((app, index) => {
+            // 搜索过滤
+            const appName = app.name || `Web应用${index+1}`;
+            if (searchTerm && !appName.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return;
+            }
+            
+            // 筛选过滤
+            if (filterType === 'configured' && !app.plugin_group_id) {
+                return;
+            }
+            if (filterType === 'unconfigured' && app.plugin_group_id) {
+                return;
+            }
+            
             const li = document.createElement('li');
-            li.textContent = app.name || `Web应用${index+1}`;
+            li.textContent = appName;
             li.dataset.id = `web-${index}`;
             li.dataset.category = 'web';
             li.dataset.index = index;
@@ -323,8 +356,22 @@ function updateAppList() {
     // 添加Tunnel应用
     if (apps.tunnel && apps.tunnel.length > 0) {
         apps.tunnel.forEach((app, index) => {
+            // 搜索过滤
+            const appName = app.name || `隧道应用${index+1}`;
+            if (searchTerm && !appName.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return;
+            }
+            
+            // 筛选过滤
+            if (filterType === 'configured' && !app.plugin_group_id) {
+                return;
+            }
+            if (filterType === 'unconfigured' && app.plugin_group_id) {
+                return;
+            }
+            
             const li = document.createElement('li');
-            li.textContent = app.name || `隧道应用${index+1}`;
+            li.textContent = appName;
             li.dataset.id = `tunnel-${index}`;
             li.dataset.category = 'tunnel';
             li.dataset.index = index;

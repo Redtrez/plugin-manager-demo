@@ -88,6 +88,18 @@
                             <button id="web-app-btn" class="app-type-btn active">WEB应用</button>
                             <button id="tunnel-app-btn" class="app-type-btn">隧道应用</button>
                         </div>
+                        <div class="search-filter-container">
+                            <div class="filter-dropdown">
+                                <select id="app-filter">
+                                    <option value="all">所有应用</option>
+                                    <option value="configured">已配置插件</option>
+                                    <option value="unconfigured">未配置插件</option>
+                                </select>
+                            </div>
+                            <div class="search-box">
+                                <input type="text" id="app-search" placeholder="搜索应用...">
+                            </div>
+                        </div>
                         <div id="app-lists-container">
                             <div id="web-app-container" class="app-list-container active">
                                 <ul id="web-app-list" class="item-list">
