@@ -818,8 +818,9 @@ function hideDialog() {
 function confirmDialog() {
     const dialog = document.getElementById('dialog');
     const dialogTitle = document.getElementById('dialog-title');
+    const dialogTitleText = dialogTitle.textContent;
     
-    if (dialogTitle.textContent.includes('新增插件')) {
+    if (dialogTitleText === '新增插件') {
         const pluginId = document.getElementById('plugin-id').value.trim();
         
         if (!pluginId) {
@@ -838,7 +839,7 @@ function confirmDialog() {
         loadPlugin(pluginId);
         
         showToast('插件创建成功');
-    } else if (dialogTitle.textContent.includes('新增插件组')) {
+    } else if (dialogTitleText === '新增插件组') {
         const groupId = document.getElementById('group-id').value.trim();
         
         if (!groupId) {
