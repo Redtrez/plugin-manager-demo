@@ -89,6 +89,18 @@ function initEditors() {
     });
 }
 
+// 格式化JSON
+function formatJSON(editor) {
+    try {
+        const currentValue = editor.getValue();
+        const jsonObj = JSON.parse(currentValue);
+        const formattedJSON = JSON.stringify(jsonObj, null, 2);
+        editor.setValue(formattedJSON);
+    } catch (e) {
+        alert('JSON格式错误，无法格式化');
+    }
+}
+
 // 初始化应用类型切换
 function initAppTypeTabs() {
     const webAppBtn = document.getElementById('web-app-btn');
@@ -122,17 +134,20 @@ function initEventListeners() {
     document.getElementById('delete-plugin')?.addEventListener('click', deletePlugin);
     document.getElementById('save-plugin')?.addEventListener('click', savePlugin);
     document.getElementById('reset-plugin')?.addEventListener('click', () => loadPlugin(currentPluginId));
+    document.getElementById('format-plugin')?.addEventListener('click', () => formatJSON(pluginEditor));
     
     // 插件组相关事件
     document.getElementById('add-group')?.addEventListener('click', () => showDialog('新增插件组', 'group'));
     document.getElementById('delete-group')?.addEventListener('click', deleteGroup);
     document.getElementById('save-group')?.addEventListener('click', saveGroup);
     document.getElementById('reset-group')?.addEventListener('click', () => loadGroup(currentGroupId));
+    document.getElementById('format-group')?.addEventListener('click', () => formatJSON(groupEditor));
     
     // 应用相关事件
     document.getElementById('save-app')?.addEventListener('click', saveApp);
     document.getElementById('reset-app')?.addEventListener('click', () => loadApp(currentAppId));
     document.getElementById('apply-group-to-app')?.addEventListener('click', applyGroupToCurrentApp);
+    document.getElementById('format-app')?.addEventListener('click', () => formatJSON(appEditor));
     
     // 移除插件组应用到应用的事件
     
@@ -151,6 +166,7 @@ function initEventListeners() {
     // 元数据相关事件
     document.getElementById('save-metadata')?.addEventListener('click', saveMetadata);
     document.getElementById('reset-metadata')?.addEventListener('click', () => loadMetadata(currentMetadataType));
+    document.getElementById('format-metadata')?.addEventListener('click', () => formatJSON(metadataEditor));
     document.querySelectorAll('input[name="metadata-type"]').forEach(radio => {
         radio.addEventListener('change', (e) => {
             currentMetadataType = e.target.value;
