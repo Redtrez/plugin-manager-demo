@@ -776,11 +776,25 @@ function updateAppList(searchTerm = '', filterType = 'all') {
                 return;
             }
             
-            // 筛选过滤
-            if (filterType === 'configured' && !app.plugin_group_id) {
+            // 筛选过滤 - 检查应用配置是否为空
+            const appId = `web-${index}`;
+            const appConfigData = appConfigs.web && appConfigs.web.find(config => config.id === appId);
+            
+            // 检查配置是否为空（所有配置对象都为空对象）
+            let hasNonEmptyConfig = false;
+            if (appConfigData && appConfigData.config) {
+                const { pluginGroups, plugins, routes } = appConfigData.config;
+                hasNonEmptyConfig = (
+                    (pluginGroups && Object.keys(pluginGroups).length > 0) ||
+                    (plugins && Object.keys(plugins).length > 0) ||
+                    (routes && Object.keys(routes).length > 0)
+                );
+            }
+            
+            if (filterType === 'configured' && !hasNonEmptyConfig) {
                 return;
             }
-            if (filterType === 'unconfigured' && app.plugin_group_id) {
+            if (filterType === 'unconfigured' && hasNonEmptyConfig) {
                 return;
             }
             
