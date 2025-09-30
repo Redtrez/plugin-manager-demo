@@ -1,0 +1,134 @@
+{
+  "web": [
+    {
+      "id": "web-0",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "web-1",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "web-2",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "web-3",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "web-4",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "web-5",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "web-6",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "web-7",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "web-8",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "web-9",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "web-10",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    }
+  ],
+  "tunnel": [
+    {
+      "id": "tunnel-0",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "tunnel-1",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "tunnel-2",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "tunnel-3",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    },
+    {
+      "id": "tunnel-4",
+      "config": {
+        "pluginGroups": {},
+        "plugins": {},
+        "routes": {}
+      }
+    }
+  ]
+}

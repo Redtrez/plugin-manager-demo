@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用插件</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Monaco Editor Loader -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.36.1/min/vs/loader.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>应用插件</h1>
+        </header>
+        
+        <!-- 标签导航 -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="global-config-tab">全局配置</button>
+            <button class="tab-btn" data-tab="app-tab">应用配置</button>
+        </div>
+        
+        <!-- 移除测试用例加载按钮 -->
+        
+        <!-- 标签内容 -->
+        <div class="tab-content">
+            <!-- 应用标签页 -->
+            <div id="app-tab" class="tab-pane">
+                <div class="panel-layout">
+                    <div class="panel-left">
+                        <div class="config-list-container">
+                            <h3 class="list-title">WEB应用</h3>
+                        </div>
+                        <div class="search-filter-container">
+                            <div class="filter-dropdown">
+                                <select id="app-filter">
+                                    <option value="all">所有应用</option>
+                                    <option value="configured">已配置插件</option>
+                                    <option value="unconfigured">未配置插件</option>
+                                </select>
+                            </div>
+                            <div class="search-box">
+                                <input type="text" id="app-search" placeholder="搜索应用...">
+                            </div>
+                        </div>
+                        <div id="app-lists-container">
+                            <div id="web-app-container" class="app-list-container active">
+                                <ul id="web-app-list" class="item-list">
+                                    <!-- WEB应用列表将通过JavaScript动态生成 -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-right">
+                        <div class="editor-header">
+                            <div class="config-tabs">
+                                <button class="config-tab-btn active" data-config="pluginGroups">插件组配置</button>
+                                <button class="config-tab-btn" data-config="plugins">插件配置</button>
+                                <button class="config-tab-btn" data-config="routes">子路由配置</button>
+                            </div>
+                        </div>
+                        <div id="app-editor" class="editor"></div>
+                        <div class="editor-footer">
+                            <div class="button-group">
+                                <button id="reset-app" class="btn">重置</button>
+                                <button id="format-app" class="btn">格式化</button>
+                                <button id="save-app" class="btn save-btn">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 全局配置标签页 -->
+            <div id="global-config-tab" class="tab-pane active">
+                <div class="panel-layout">
+                    <div class="panel-left">
+                        <div class="config-list-container">
+                            <h3 class="list-title">全局配置</h3>
+                            <ul id="config-list" class="item-list">
+                                <li class="item active" data-config="plugin-group">插件组</li>
+                                <li class="item" data-config="plugin">插件</li>
+                                <li class="item" data-config="plugin-metadata">插件元数据</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-right">
+                        <div class="editor-header">
+                            <h3 id="global-config-title">插件组配置</h3>
+                        </div>
+                        <div id="global-editor" class="editor"></div>
+                        <div class="editor-footer">
+                            <div class="button-group">
+                                <button id="reset-global" class="btn">重置</button>
+                                <button id="format-global" class="btn">格式化</button>
+                                <button id="save-global" class="btn save-btn">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 对话框 -->
+        <div id="dialog" class="dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">
+                    <h3 id="dialog-title">对话框标题</h3>
+                    <button id="dialog-close" class="close-btn">&times;</button>
+                </div>
+                <div id="dialog-body" class="dialog-body">
+                    <!-- 对话框内容将通过JavaScript动态生成 -->
+                </div>
+                <div class="dialog-footer">
+                    <button id="dialog-cancel" class="btn">取消</button>
+                    <button id="dialog-confirm" class="btn primary">确定</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 提示框 -->
+        <div id="toast" class="toast"></div>
+    </div>
+    
+    <!-- 自定义JS -->
+    <script src="script.js"></script>
+</body>
+</html>
